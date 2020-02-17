@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="face-api.js"></script>
+  <script src="js/commons.js"></script>
+  <script src="js/faceDetectionControls.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</head>
+<body>
+
+    <div class="progress" id="loader">
+      <div class="indeterminate"></div>
+    </div>
+    <div style="position: relative" class="margin">
+      <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+      <canvas id="overlay">
+    </div>
+    <button onclick="openMusic()" class="plyBtn">Capture</button>
+    <div class="showPlay">
+      <button onclick="showMusic()" class="showCapture">Back to Video</button>
+    </div>
+  </body>
+
+  <script>
+    let forwardTimes = []
+    let withBoxes = true
+    let exp = [];
+    let videoEl = $('#inputVideo').get(0);
+    let canvas = $('#overlay').get(0)
+    let showDiv = $('.showPlay').get(0)
+    let plyBtn = $('.plyBtn').get(0)
+    async function onPlay() {
+      const videoEl = $('#inputVideo').get(0)
+      if(videoEl.paused || videoEl.ended || !isFaceDetectionModelLoaded())
+        return setTimeout(() => onPlay())
+
+
+      const options = getFaceDetectorOptions()
+
+      const ts = Date.now()
+
+      const result = await faceapi.detectSingleFace(videoEl, options).withFaceExpressions()
+      
+      if (result) {
+        $('.plyBtn').show();
+        exp = result.expressions;
+        const canvas = $('#overlay').get(0)
+        const dims = faceapi.matchDimensions(canvas, videoEl, true)
+        const resizedResult = faceapi.resizeResults(result, dims)
+        console.log('###result',result)
+        console.log('###resizedResult',resizedResult)
+        const minConfidence = 0.05
+        if (withBoxes) {
+          faceapi.draw.drawDetections(canvas, resizedResult)
+        }
+        faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence)
+      }
+      setTimeout(() => onPlay())
+    }
+
+    async function run() {
+      // load face detection and face expression recognition models
+      await changeFaceDetector(TINY_FACE_DETECTOR)
+      await faceapi.loadFaceExpressionModel('/')
+      changeInputSize(224)
+
+      // try to access users webcam and stream the images
+      // to the video element
+      const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
+      const videoEl = $('#inputVideo').get(0)
+      videoEl.srcObject = stream
+      console.log('stream', videoEl.srcObject);
+    }
+    
+    function updateResults() {}
+
+    function showMusic(){
+      $('.plyBtn').hide();
+      videoEl.style.display = "block";
+      canvas.style.display = "block";
+      showDiv.style.display = "none";
+      $('.video').remove();
+      // $('.showPlay > .video').remove();
+      $('.showPlay > p').remove();
+      initFaceDetectionControls()
+      run()
+      $('.margin').show();
+    }
+    function openMusic(){
+      stopStreamedVideo(videoEl);
+      let moods = {};
+      let moodVal = 0;
+      let mood;
+      videoEl.style.display = "none";
+      canvas.style.display = "none";
+      showDiv.style.display = "block";
+      plyBtn.style.display = 'none';
+      $('.plyBtn').hide();
+      $('.margin').hide();
+      // Get happy, sad and anger values
+      // Object.entries(exp).forEach(moo => {
+      //   if(moo[0] == 'sad') {
+      //     moods.sad = moo[1]
+      //   }
+      //   else if(moo[0] == 'happy'){
+      //     moods.happy = moo[1]
+      //   }
+      //   else if(moo[0] == 'angry'){
+      //     moods.angry = moo[1]
+      //   }
+      //   else if(moo[0] == 'neutral'){
+      //     moods.neutral = moo[1]
+      //   }  
+      //   else if(moo[0] == 'surprised'){
+      //     moods.surprised = moo[1]
+      //   }
+      //   else if(moo[0] == 'disgusted'){
+      //     moods.disgusted = moo[1]
+      //   }
+      // });
+
+        //Find the exact emotion
+        Object.entries(exp).forEach(function(num){
+          if(moodVal < num[1]) {
+            moodVal = num[1];
+            mood = num[0]
+          } 
+        });
+
+        console.log('all',exp)
+        console.log('moodNum',moodVal)
+        console.log('mood',mood)
+        let iFrameVid;
+        if(mood == 'sad') {
+          iFrameVid = '<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/J_ub7Etch2U?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+        }
+        else if(mood == 'happy'){
+          iFrameVid = '<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/ZbZSe6N_BXs?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+        }
+        else if(mood == 'angry'){
+          iFrameVid = '<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/7PSS1i-mgFI?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+        }
+        else if(mood == 'neutral'){
+          iFrameVid = '<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/gOsM-DYAEhY?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+        }  
+        else if(mood == 'surprised'){
+          iFrameVid = '<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/pijhWmpkFgk?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+        }
+        else if(mood == 'disgusted'){
+          iFrameVid = '<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/fmMUCMesVtE?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+        }
+        $('.showPlay > .showCapture').before('<p>Playing video based on your '+ mood+' mood</p>'+iFrameVid)
+    }
+    
+    //stop cam
+    function stopStreamedVideo(videoElem) {
+      let stream = videoElem.srcObject;
+      let tracks = stream.getTracks();
+
+      tracks.forEach(function(track) {
+        track.stop();
+      });
+
+      videoElem.srcObject = null;
+    }
+    $(document).ready(function() {
+      initFaceDetectionControls();
+      run();
+    })
+  </script>
+</body>
+</html>

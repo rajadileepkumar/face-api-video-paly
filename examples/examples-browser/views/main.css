@@ -1,0 +1,20 @@
+.landing__screen{
+    background: url('layer.png');
+    width: 650px;
+    height: 650px;
+    margin: 5rem auto;
+    background-size: cover;
+    cursor: pointer;
+  }
+  .tag__line{
+      position: absolute;
+      top: 50%;
+      font-size: 32px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      text-transform: capitalize;
+      width: 450px;
+      margin: 0 auto;
+      line-height: 1.3;
+  }

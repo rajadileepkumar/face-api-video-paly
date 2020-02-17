@@ -1,0 +1,105 @@
+body{
+  text-align: center;
+}
+.page-container {
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 20px;
+  padding-left: 280px;
+  display: inline-flex !important;
+}
+
+@media only screen and (max-width : 992px) {
+  .page-container {
+    padding-left: 0;
+    display: flex !important;
+  }
+}
+
+#navbar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.side-by-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.side-by-side >* {
+  margin: 0 5px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.margin-sm {
+  margin: 5px;
+}
+
+.margin,.showPlay {
+  width: 650px;
+  height: 100%;
+  margin: 5rem auto;
+  box-shadow: 0px 4px 4px 6px #ddd;
+  padding: 0;
+  background: #fff;
+  border-radius: 4px;
+  padding: 1%;
+}
+
+.button-sm {
+  padding: 0 10px !important;
+}
+
+.pad-sides-sm {
+  padding: 0 8px !important;
+}
+
+#github-link {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+}
+
+#overlay, .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#facesContainer canvas {
+  margin: 10px;
+}
+.showPlay{
+  display: none;
+}
+#minFaceSize{
+  width: 200px;
+  height: 500px;
+  background: green;
+}
+
+.plyBtn{
+  display: none;
+}
+video#inputVideo,video{
+  width: 100%;
+}
+.plyBtnclass{
+  display: block !important;
+  margin: 0 auto;
+}
