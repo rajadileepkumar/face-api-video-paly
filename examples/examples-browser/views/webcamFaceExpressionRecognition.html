@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="bot-icon.png" type="image/gif" >
   <script src="face-api.js"></script>
   <script src="js/commons.js"></script>
   <script src="js/faceDetectionControls.js"></script>
@@ -8,21 +11,90 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
-
-    <div class="progress" id="loader">
-      <div class="indeterminate"></div>
+  <div id="loader" class="loading">
+    <img src="discord-picture-loading-gif.gif" alt="" class="center">
+    <small>loading...</small>
+  </div>
+  <div class="wrapper_content_dashboard">
+    <div class="wrapper_container">
+        <div class="grid_one">
+            <ul class="side_nav">
+              <li data-toggle="tooltip" data-placement="right" title="Chat Bot" class="active"><a href="dashboard"><img src="bot-icon.png" alt=""></a></li>
+              <li data-toggle="tooltip" data-placement="right" title="Chat Bot"><a href="#"><img src="chat-icon.png" alt="Music Bot"></a></li>
+              <li data-toggle="tooltip" data-placement="right" title="Tooltip on right"><a href="#"><img src="plus.png" alt="Musice Bot"></a></li>
+              <li data-toggle="tooltip" data-placement="right" title="Tooltip on right" ><a href="search"><img src="playlist.png" alt="Music Bot"></a></li>
+              <li data-toggle="tooltip" data-placement="right" title="Tooltip on right"><a href="playlist"><img src="search-icon.png" alt="Music Bot"></a></li>
+            </ul>
+        </div>
+        <div class="grid_two">
+            <div class="nav-top">
+                <h6>Face Bot Server</h6>
+            </div>
+            <div class="">
+              <ul class="list"></ul>
+            </div>
+            <div class="nav-bottom">
+                <div class="bottom-music-box">
+                    <img src="chat-icon.png" />
+                </div>
+            </div>
+        </div>
+        <div class="grid_three">
+            <ul class="main-navigation">
+                <li><a href="dashboard">Home</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="blog">Blog</a></li>
+                <li><a href="help">Help</a></li>
+                <li><a href="detecting-mood">My Camara</a></li>
+            </ul>
+            <div class="content">
+              <div class="content-wraper">
+                <div style="position: relative">
+                  <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+                  <canvas id="overlay">
+                </div>
+                <button onclick="openMusic()" class="plyBtn">Capture</button>
+                <div class="showPlay">
+                  <button onclick="showMusic()" class="showCapture">Back to Video</button>
+                </div>
+              </div>
+              <ul class="full-list"></ul>
+            </div>
+        </div>
+        <div class="grid_four">
+            <ul class="account-navigation">
+                <li>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+                <li>
+                    <a href="#">Hello, Janani<img src="user-icon.png"/></a>
+                </li>
+            </ul>
+            <div>
+              <div class="heading-sub">
+                  <p>Online</p>
+              </div>
+              <div class="heading-sub">
+                  <p><img src="chat-icon.png" alt="Music Bot" class="info-icon"/> Janani</p>
+              </div>
+              <div class="heading-sub">
+                  <p>Offline</p>
+              </div>
+          </div>
+        </div>
     </div>
-    <div style="position: relative" class="margin">
-      <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
-      <canvas id="overlay">
-    </div>
-    <button onclick="openMusic()" class="plyBtn">Capture</button>
-    <div class="showPlay">
-      <button onclick="showMusic()" class="showCapture">Back to Video</button>
-    </div>
-  </body>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
 
   <script>
     let forwardTimes = []
@@ -78,7 +150,7 @@
     function updateResults() {}
 
     function showMusic(){
-      $('.plyBtn').hide();
+      $('.plyBtn').toggle();
       videoEl.style.display = "block";
       canvas.style.display = "block";
       showDiv.style.display = "none";
@@ -153,6 +225,13 @@
           iFrameVid = '<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/fmMUCMesVtE?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
         }
         $('.showPlay > .showCapture').before('<p>Playing video based on your '+ mood+' mood</p>'+iFrameVid)
+        var apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+mood+ 'music&type=video&videoDefinition=high&key=AIzaSyCmudHGK2SYwNKbT3h5RzB98wsOH_rumVY';
+        jQuery.getJSON(apiURL, function(result){
+          var apiResult = result.items;
+          apiResult.forEach(item => {
+            $('.full-list').prepend('<li>'+'<img src='+item.snippet.thumbnails.high.url+' width='+item.snippet.thumbnails.high.width+' height='+item.snippet.thumbnails.high.height+' />'+'<span class="title">'+item.snippet.title+'</span>'+'<span class="description">'+item.snippet.description+'</span><a class="link" target="_blank" href="https://www.youtube.com/watch?v='+item.id.videoId+'" >Play More</a></li>');
+          });
+        });
     }
     
     //stop cam

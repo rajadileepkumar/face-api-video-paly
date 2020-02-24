@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="bot-icon.png" type="image/gif" >
+  <script src="face-api.js"></script>
+  <script src="js/commons.js"></script>
+  <script src="js/faceDetectionControls.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="loader" class="loading">
+        <img src="discord-picture-loading-gif.gif" alt="" class="center">
+        <small>loading...</small>
+    </div>
+    <div class="wrapper_content_dashboard">
+        <div class="wrapper_container">
+            <div class="grid_one">
+                <ul class="side_nav">
+                    <li data-toggle="tooltip" data-placement="right" title="Chat Bot" class="active"><a href="dashboard"><img src="bot-icon.png" alt=""></a></li>
+                    <li data-toggle="tooltip" data-placement="right" title="Chat Bot"><a href="#"><img src="chat-icon.png" alt="Music Bot"></a></li>
+                    <li data-toggle="tooltip" data-placement="right" title="Tooltip on right"><a href="#"><img src="plus.png" alt="Musice Bot"></a></li>
+                    <li data-toggle="tooltip" data-placement="right" title="Tooltip on right" ><a href="playlist"><img src="playlist.png" alt="Music Bot"></a></li>
+                    <li data-toggle="tooltip" data-placement="right" title="Tooltip on right"><a href="search"><img src="search-icon.png" alt="Music Bot"></a></li>
+                </ul>
+            </div>
+            <div class="grid_two">
+                <div class="nav-top">
+                    <h6>Face Bot Server</h6>
+                </div>
+                <div class="">
+                    <ul class="list"></ul>
+                </div>
+                <div class="nav-bottom">
+                    <div class="bottom-music-box">
+                        <img src="chat-icon.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="grid_three">
+                <ul class="main-navigation">
+                    <li><a href="dashboard">Home</a></li>
+                    <li><a href="about">About</a></li>
+                    <li><a href="blog">Blog</a></li>
+                    <li><a href="help">Help</a></li>
+                    <li><a href="detecting-mood">My Camara</a></li>
+                </ul>
+                <div class="content">
+                    <h1>About</h1>
+                    <h1>Face Detection Models</h1>
+                    <h3>SSD Mobilenet V1</h3>
+                    <p>For face detection, this project implements a SSD (Single Shot Multibox Detector) based on MobileNetV1. The neural net will compute the locations of each face in an image and will return the bounding boxes together with it's probability for each face. This face detector is aiming towards obtaining high accuracy in detecting face bounding boxes instead of low inference time. The size of the quantized model is about 5.4 MB (ssd_mobilenetv1_model).
+                        The face detection model has been trained on the WIDERFACE dataset and the weights are provided by yeephycho in this repo.</p>
+                    <h3>Tiny Face Detector</h3>
+                    <p>The Tiny Face Detector is a very performant, realtime face detector, which is much faster, smaller and less resource consuming compared to the SSD Mobilenet V1 face detector, in return it performs slightly less well on detecting small faces. This model is extremely mobile and web friendly, thus it should be your GO-TO face detector on mobile devices and resource limited clients. The size of the quantized model is only 190 KB (tiny_face_detector_model).
+                        The face detector has been trained on a custom dataset of ~14K images labeled with bounding boxes. Furthermore the model has been trained to predict bounding boxes, which entirely cover facial feature points, thus it in general produces better results in combination with subsequent face landmark detection than SSD Mobilenet V1.
+                        This model is basically an even tinier version of Tiny Yolo V2, replacing the regular convolutions of Yolo with depthwise separable convolutions. Yolo is fully convolutional, thus can easily adapt to different input image sizes to trade off accuracy for performance (inference time).</p>
+                    <h3>68 Point Face Landmark Detection Models</h3>
+                    <p>
+                        This package implements a very lightweight and fast, yet accurate 68 point face landmark detector. The default model has a size of only 350kb (face_landmark_68_model) and the tiny model is only 80kb (face_landmark_68_tiny_model). Both models employ the ideas of depthwise separable convolutions as well as densely connected blocks. The models have been trained on a dataset of ~35k face images labeled with 68 face landmark points.
+                    </p>
+                    <h3>Face Recognition Model</h3>
+                    <p>
+                        For face recognition, a ResNet-34 like architecture is implemented to compute a face descriptor (a feature vector with 128 values) from any given face image, which is used to describe the characteristics of a persons face. The model is not limited to the set of faces used for training, meaning you can use it for face recognition of any person, for example yourself. You can determine the similarity of two arbitrary faces by comparing their face descriptors, for example by computing the euclidean distance or using any other classifier of your choice.
+                        The neural net is equivalent to the FaceRecognizerNet used in face-recognition.js and the net used in the dlib face recognition example. The weights have been trained by davisking and the model achieves a prediction accuracy of 99.38% on the LFW (Labeled Faces in the Wild) benchmark for face recognition.
+                        The size of the quantized model is roughly 6.2 MB (face_recognition_model).
+                    </p>
+                    <h3>Face Expression Recognition Model</h3>
+                    <p>
+                        The face expression recognition model is lightweight, fast and provides reasonable accuracy. The model has a size of roughly 310kb and it employs depthwise separable convolutions and densely connected blocks. It has been trained on a variety of images from publicly available datasets as well as images scraped from the web. Note, that wearing glasses might decrease the accuracy of the prediction results.
+                    </p>
+                    <h3>Age and Gender Recognition Model</h3>
+                    <p>
+                        The age and gender recognition model is a multitask network, which employs a feature extraction layer, an age regression layer and a gender classifier. The model has a size of roughly 420kb and the feature extractor employs a tinier but very similar architecture to Xception.
+                    </p>
+                    <p>
+                        This model has been trained and tested on the following databases with an 80/20 train/test split each: UTK, FGNET, Chalearn, Wiki, IMDB*, CACD*, MegaAge, MegaAge-Asian. The * indicates, that these databases have been algorithmically cleaned up, since the initial databases are very noisy.
+                    </p>
+                    <img src="snippet.png" alt="Music Bot" class="img-responsive">
+                </div>
+            </div>
+            <div class="grid_four">
+                <ul class="account-navigation">
+                    <li>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                          </label>
+                    </li>
+                    <li>
+                        <a href="#">Hello, Janani<img src="user-icon.png"/></a>
+                    </li>
+                </ul>
+                <div>
+                    <div class="heading-sub">
+                        <p>Online</p>
+                    </div>
+                    <div class="heading-sub">
+                        <p><img src="chat-icon.png" alt="Music Bot" class="info-icon"/> Janani</p>
+                    </div>
+                    <div class="heading-sub">
+                        <p>Offline</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>

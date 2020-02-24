@@ -1,6 +1,20 @@
 body{
   text-align: center;
 }
+.loading { 
+  background: #212529;
+  min-height: 100vh;
+} 
+.center { 
+  position: absolute; 
+  top: 0; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  margin: auto; 
+  height: 172px;
+  width: 182px;
+} 
 .page-container {
   left: 0;
   right: 0;
@@ -52,9 +66,9 @@ body{
   width: 650px;
   height: 100%;
   margin: 5rem auto;
-  box-shadow: 0px 4px 4px 6px #ddd;
+  /*box-shadow: 0px 4px 4px 6px #ddd;*/
   padding: 0;
-  background: #fff;
+  /* background: #fff; */
   border-radius: 4px;
   padding: 1%;
 }
@@ -86,6 +100,22 @@ body{
 }
 .showPlay{
   display: none;
+  color: #fff;
+  text-align: center;
+}
+iframe{
+  width: 100%;
+  margin-bottom: 30px;
+}
+.showCapture{
+  background: #cf4d67;
+  padding: 8px 25px;
+  width: 200px;
+  border: none;
+  border-radius: 4px;
+  height: 3rem;
+  color: #fff;
+  text-transform: uppercase;
 }
 #minFaceSize{
   width: 200px;
@@ -95,6 +125,14 @@ body{
 
 .plyBtn{
   display: none;
+  background: #cf4d67;
+    padding: 8px 25px;
+    width: 200px;
+    border: none;
+    border-radius: 4px;
+    height: 3rem;
+    margin-top: 10px;
+    text-transform: uppercase;
 }
 video#inputVideo,video{
   width: 100%;

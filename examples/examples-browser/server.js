@@ -16,6 +16,12 @@ app.use(express.static(path.join(__dirname, '../../weights')))
 app.use(express.static(path.join(__dirname, '../../dist')))
 
 app.get('/', (req, res) => res.sendFile(path.join(viewsDir, 'index.html')))
+app.get('/dashboard', (req, res) => res.sendFile(path.join(viewsDir, 'home.html')))
+app.get('/about', (req, res) => res.sendFile(path.join(viewsDir, 'about.html')))
+app.get('/blog', (req, res) => res.sendFile(path.join(viewsDir, 'blog.html')))
+app.get('/help', (req, res) => res.sendFile(path.join(viewsDir, 'help.html')))
+app.get('/search', (req, res) => res.sendFile(path.join(viewsDir, 'search.html')))
+app.get('/playlist', (req, res) => res.sendFile(path.join(viewsDir, 'playlist.html')))
 app.get('/detecting-mood', (req, res) => res.sendFile(path.join(viewsDir, 'webcamFaceExpressionRecognition.html')))
 
 app.post('/fetch_external_image', async (req, res) => {
