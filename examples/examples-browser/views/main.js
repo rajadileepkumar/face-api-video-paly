@@ -39,7 +39,7 @@ $(function () {
 })
 
 function getTheListFromYoutube(){
-  const apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=tamil music&type=video&videoDefinition=high&key=AIzaSyCmudHGK2SYwNKbT3h5RzB98wsOH_rumVY';
+  const apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=tamil music&type=video&videoDefinition=high&key=################################';
   jQuery.getJSON(apiURL, function(result){
     var apiResult = result.items;
     apiResult.forEach(item => {
@@ -56,7 +56,7 @@ getTheListFromYoutube();
 $('#searchMusicOrVideo').click(function(){
   var key = $('#search').val();
   event.preventDefault();
-  var apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+key+'&type=video&videoDefinition=high&key=AIzaSyCmudHGK2SYwNKbT3h5RzB98wsOH_rumVY';
+  var apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+key+'&type=video&videoDefinition=high&key=################';
   jQuery.getJSON(apiURL, function(result){
     var apiResult = result.items;
     apiResult.forEach(item => {

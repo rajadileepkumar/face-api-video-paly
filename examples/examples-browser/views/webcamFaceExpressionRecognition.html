@@ -225,7 +225,7 @@
           iFrameVid = '<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/fmMUCMesVtE?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
         }
         $('.showPlay > .showCapture').before('<p>Playing video based on your '+ mood+' mood</p>'+iFrameVid)
-        var apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+mood+ 'music&type=video&videoDefinition=high&key=AIzaSyCmudHGK2SYwNKbT3h5RzB98wsOH_rumVY';
+        var apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+mood+ 'music&type=video&videoDefinition=high&key=#####################';
         jQuery.getJSON(apiURL, function(result){
           var apiResult = result.items;
           apiResult.forEach(item => {
