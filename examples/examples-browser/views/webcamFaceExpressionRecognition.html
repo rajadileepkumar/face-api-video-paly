@@ -245,7 +245,7 @@
       }
       $('.showPlay > .showCapture').before('<div class="playing-video">Playing video based on your ' + mood + ' mood</div>' + iFrameVid)
       var apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + mood +
-        'music&type=video&videoDefinition=high&key=AIzaSyC5BAG7iNFKNOYBKIZbMDD4nyfmIAw9NkQ';
+        'music&type=video&videoDefinition=high&key=##############';
       jQuery.getJSON(apiURL, function (result) {
         var apiResult = result.items;
         apiResult.forEach(item => {
