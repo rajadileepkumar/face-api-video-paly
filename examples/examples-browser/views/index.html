@@ -1,57 +1,64 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta name="viewport" content="width=device-width">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="bot-icon.png" type="image/gif" >
-  <script src="face-api.js"></script>
-  <script src="js/commons.js"></script>
-  <script src="js/faceDetectionControls.js"></script>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="main.css">
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="bot-icon.png" type="image/gif">
+    <script src="face-api.js"></script>
+    <script src="js/commons.js"></script>
+    <script src="js/faceDetectionControls.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/sass/style.css">
 </head>
+
 <body>
-  <div id="loader" class="loading">
-    <img src="discord-picture-loading-gif.gif" alt="" class="center">
-    <small>loading...</small>
-  </div> 
+    <div id="loader" class="loading">
+        <img src="images/discord-picture-loading-gif.gif" alt="" class="center">
+        <small>loading...</small>
+    </div>
     <div class="wrapper_content">
-        <div class="wrapper_login_left"><h1>Music Recommender system Embeded with music boat</h1></div>
+        <!-- <div class="wrapper_login_left">
+            <h1>Music Recommender system Embedded with music boat</h1>
+        </div> -->
         <div class="wrapper_login_right">
-          <div class="form-group-container">
-            <div class="form-group-heading">
-              <img src="logo-login.png" alt="FaceBot">
+            <div class="form-group-container">
+                <div class="form-group-heading">
+                    <img src="images/logo-login.png" alt="FaceBot">
+                </div>
+                <div class="form-group-content">
+                    <p>Hi there<br />Fill Up personal information and start journey with us</p>
+                    <div class="form-group-body">
+                        <form method="GET">
+                            <div class="form-group">
+                                <input type="text" placeholder="Username" class="form-control" id="userName" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Password" class="form-control" id="password" />
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="button" id="login" value="Submit">
+                            </div>
+                            <div class="errorMessage"></div>
+                        </form>
+                    </div>
+                    <div class="form-group-footer">
+                        <p>Do you have an account?<a href="#">Register Here</a></p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group-content">
-              <p>Hi there<br/>Fill Up personal information and start journey with us</p>
-              <div class="form-group-body">
-                <form method="GET">
-                  <div class="form-group">
-                    <input type="text" placeholder="Username" class="form-control" id="userName" />
-                  </div>
-                  <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control" id="password" />
-                  </div>
-                  <div class="form-group form-button">
-                    <input type="button" id="login" value="Submit">
-                  </div>
-                  <div class="errorMessage"></div>
-                </form>
-              </div>
-              <div class="form-group-footer">
-                <p>Do you have an account?<a href="#">Register Here</a></p>
-              </div>
-            </div>
-          </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script src="main.js"></script>
 </body>
+
 </html>

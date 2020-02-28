@@ -1,131 +1,138 @@
-body{
-  text-align: center;
-}
-.loading { 
-  background: #212529;
-  min-height: 100vh;
-} 
-.center { 
-  position: absolute; 
-  top: 0; 
-  bottom: 0; 
-  left: 0; 
-  right: 0; 
-  margin: auto; 
-  height: 172px;
-  width: 182px;
-} 
-.page-container {
-  left: 0;
-  right: 0;
-  margin: auto;
-  margin-top: 20px;
-  padding-left: 280px;
-  display: inline-flex !important;
+body {
+    text-align: center;
 }
 
-@media only screen and (max-width : 992px) {
-  .page-container {
-    padding-left: 0;
-    display: flex !important;
-  }
+.loading {
+    background: #212529;
+    min-height: 100vh;
+}
+
+.center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 172px;
+    width: 182px;
+}
+
+.page-container {
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 20px;
+    padding-left: 280px;
+    display: inline-flex !important;
+}
+
+@media only screen and (max-width: 992px) {
+    .page-container {
+        padding-left: 0;
+        display: flex !important;
+    }
 }
 
 #navbar {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 .center-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .side-by-side {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.side-by-side >* {
-  margin: 0 5px;
+
+.side-by-side>* {
+    margin: 0 5px;
 }
 
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .margin-sm {
-  margin: 5px;
+    margin: 5px;
 }
 
-.margin,.showPlay {
-  width: 650px;
-  height: 100%;
-  margin: 5rem auto;
-  /*box-shadow: 0px 4px 4px 6px #ddd;*/
-  padding: 0;
-  /* background: #fff; */
-  border-radius: 4px;
-  padding: 1%;
+.margin,
+.showPlay {
+    width: 100%;
+    height: auto;
+    margin: 1rem auto;
+    padding: 0;
+    border-radius: 4px;
 }
 
 .button-sm {
-  padding: 0 10px !important;
+    padding: 0 10px !important;
 }
 
 .pad-sides-sm {
-  padding: 0 8px !important;
+    padding: 0 8px !important;
 }
 
 #github-link {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid;
-  margin-bottom: 10px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
 }
 
-#overlay, .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+#overlay,
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #facesContainer canvas {
-  margin: 10px;
-}
-.showPlay{
-  display: none;
-  color: #fff;
-  text-align: center;
-}
-iframe{
-  width: 100%;
-  margin-bottom: 30px;
-}
-.showCapture{
-  background: #cf4d67;
-  padding: 8px 25px;
-  width: 200px;
-  border: none;
-  border-radius: 4px;
-  height: 3rem;
-  color: #fff;
-  text-transform: uppercase;
-}
-#minFaceSize{
-  width: 200px;
-  height: 500px;
-  background: green;
+    margin: 10px;
 }
 
-.plyBtn{
-  display: none;
-  background: #cf4d67;
+.showPlay {
+    display: none;
+    color: #fff;
+    text-align: center;
+}
+
+iframe {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.showCapture {
+    background: #cf4d67;
+    padding: 8px 25px;
+    width: 200px;
+    border: none;
+    border-radius: 4px;
+    height: 3rem;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+#minFaceSize {
+    width: 200px;
+    height: 500px;
+    background: green;
+}
+
+.plyBtn {
+    display: none;
+    background: #cf4d67;
     padding: 8px 25px;
     width: 200px;
     border: none;
@@ -134,10 +141,13 @@ iframe{
     margin-top: 10px;
     text-transform: uppercase;
 }
-video#inputVideo,video{
-  width: 100%;
+
+video#inputVideo,
+video {
+    width: 100%;
 }
-.plyBtnclass{
-  display: block !important;
-  margin: 0 auto;
+
+.plyBtnclass {
+    display: block !important;
+    margin: 0 auto;
 }

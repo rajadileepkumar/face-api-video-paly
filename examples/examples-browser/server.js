@@ -22,42 +22,41 @@ app.get('/blog', (req, res) => res.sendFile(path.join(viewsDir, 'blog.html')))
 app.get('/help', (req, res) => res.sendFile(path.join(viewsDir, 'help.html')))
 app.get('/search', (req, res) => res.sendFile(path.join(viewsDir, 'search.html')))
 app.get('/playlist', (req, res) => res.sendFile(path.join(viewsDir, 'playlist.html')))
+app.get('/chatbot', (req, res) => res.sendFile(path.join(viewsDir, 'chatbot.html')))
 app.get('/detecting-mood', (req, res) => res.sendFile(path.join(viewsDir, 'webcamFaceExpressionRecognition.html')))
 
-app.post('/fetch_external_image', async (req, res) => {
-  const { imageUrl } = req.body
-  if (!imageUrl) {
-    return res.status(400).send('imageUrl param required')
-  }
-  try {
-    const externalResponse = await request(imageUrl)
-    res.set('content-type', externalResponse.headers['content-type'])
-    return res.status(202).send(Buffer.from(externalResponse.body))
-  } catch (err) {
-    return res.status(404).send(err.toString())
-  }
+app.post('/fetch_external_image', async(req, res) => {
+    const { imageUrl } = req.body
+    if (!imageUrl) {
+        return res.status(400).send('imageUrl param required')
+    }
+    try {
+        const externalResponse = await request(imageUrl)
+        res.set('content-type', externalResponse.headers['content-type'])
+        return res.status(202).send(Buffer.from(externalResponse.body))
+    } catch (err) {
+        return res.status(404).send(err.toString())
+    }
 })
 
 app.listen(3000, () => console.log('Listening on port 3000!'))
 
 function request(url, returnBuffer = true, timeout = 10000) {
-  return new Promise(function(resolve, reject) {
-    const options = Object.assign(
-      {},
-      {
-        url,
-        isBuffer: true,
-        timeout,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
-        }
-      },
-      returnBuffer ? { encoding: null } : {}
-    )
+    return new Promise(function(resolve, reject) {
+        const options = Object.assign({}, {
+                url,
+                isBuffer: true,
+                timeout,
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
+                }
+            },
+            returnBuffer ? { encoding: null } : {}
+        )
 
-    get(options, function(err, res) {
-      if (err) return reject(err)
-      return resolve(res)
+        get(options, function(err, res) {
+            if (err) return reject(err)
+            return resolve(res)
+        })
     })
-  })
 }
